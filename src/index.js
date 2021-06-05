@@ -25,7 +25,12 @@ function calculateWinner(squares) {
   for (let index = 0; index < lines.length; index++) {
     const [a, b, c] = lines[index];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      const winner = {
+        winnerSquares: [a, b, c],
+        squares: squares[a],
+      };
+
+      return winner;
     }
   }
   return null;
@@ -122,7 +127,7 @@ class Game extends React.Component {
 
     let status;
     if (winner != null) {
-      status = "Winner: " + winner;
+      status = "Winner: " + winner.squares;
       confetti({
         particleCount: 150,
         startVelocity: 30,
