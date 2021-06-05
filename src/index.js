@@ -76,7 +76,7 @@ class Game extends React.Component {
       stepNumber: 0,
     };
     this.x = "🌿";
-    this.o = "🍵";
+    this.o = "🍄";
   }
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
