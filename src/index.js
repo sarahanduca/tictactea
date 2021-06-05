@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import confetti from "canvas-confetti";
 
 function Square(props) {
   return (
@@ -76,7 +77,7 @@ class Game extends React.Component {
       stepNumber: 0,
     };
     this.x = "🌿";
-    this.o = "🍄";
+    this.o = "🍵";
   }
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
@@ -119,15 +120,22 @@ class Game extends React.Component {
       );
     });
 
-    let status =
-      winner != null
-        ? "Winner: " + winner
-        : "Next player: " + (this.state.xIsNext ? this.x : this.o);
+    let status;
+    if (winner != null) {
+      status = "Winner: " + winner;
+      confetti({
+        particleCount: 150,
+        startVelocity: 30,
+        spread: 360,
+      });
+    } else {
+      status = "Next player: " + (this.state.xIsNext ? this.x : this.o);
+    }
 
     return (
       <>
         <div className="title">
-          <h1>Tic Tac Tea</h1>
+          <h1>🌿 Tic Tac Tea 🍵</h1>
         </div>
         <div className="game">
           <div className="game-board">

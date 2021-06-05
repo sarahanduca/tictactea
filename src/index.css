@@ -5,6 +5,7 @@
   font-family: "Nanum Pen Script", cursive;
   font-weight: 900;
 }
+
 body {
   /* font: 40px "Century Gothic", Futura, sans-serif; */
   font-size: 40px;
@@ -19,11 +20,13 @@ ol,
 ul {
   padding-left: 100px;
 }
+
 .title {
   text-align: center;
   width: 50vw;
   margin: auto;
 }
+
 .board-row:after {
   clear: both;
   content: "";
@@ -54,20 +57,27 @@ ul {
 .square:focus {
   outline: none;
 }
+
 .game {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
 }
 
 .game-info {
   margin-left: 50px;
 }
+
 .listMoves {
-  height: 350px;
+  height: 40vh;
+  list-style: none;
+  margin-right: 90px;
   overflow-y: scroll;
-  list-style: disc;
+  overflow-x: hidden;
+  -ms-overflow-x: hidden;
 }
+
 button {
   background: rgb(76, 119, 51);
   border: none;
@@ -75,17 +85,27 @@ button {
   border-radius: 30px;
   box-shadow: 6px 6px rgba(200, 255, 50, 0.514);
 }
+
 .moves {
   font-size: 40px;
 }
+
 .moves:hover {
   cursor: pointer;
   transform: scale(1.1);
 }
+
+.moves:focus {
+  background-color: rgb(118, 156, 68);
+  border: none;
+  outline: none;
+}
+
 .square:hover {
   cursor: pointer;
   animation: changeColor 800ms forwards;
 }
+
 .emojis:hover {
   animation: viber 200ms infinite;
 }
@@ -106,19 +126,7 @@ button {
     transform: rotate(-10deg);
   }
 }
-.moves:focus {
-  background-color: rgb(118, 156, 68);
-  border: none;
-}
 
-@media screen and (max-width: 600px) {
-  .title {
-    margin-top: 300px;
-    font-size: 38px;
-    text-align: center;
-    width: 100vw;
-  }
-}
 @media screen and (max-width: 800px) {
   .game {
     display: block;
@@ -139,13 +147,14 @@ button {
     padding: 5px 0;
     font-size: 40px;
   }
+  .listMoves {
+    margin: 20px;
+    padding: 5px 0;
+    overflow: visible;
+  }
   .game-info {
     text-align: center;
     margin: auto;
-  }
-  .listMoves {
-    overflow-y: visible;
-    list-style: none;
   }
   button {
     margin-top: 10px;
@@ -160,7 +169,8 @@ button {
     padding-left: 0;
   }
   .title {
-    font-size: 38px;
+    margin-top: 200px;
+    font-size: 25px;
     text-align: center;
     width: 100vw;
   }
