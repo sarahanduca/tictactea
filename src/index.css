@@ -73,9 +73,23 @@ ul {
   height: 40vh;
   list-style: none;
   margin-right: 90px;
-  overflow-y: scroll;
+  padding-right: 1vw;
+  overflow-y: auto;
   overflow-x: hidden;
   -ms-overflow-x: hidden;
+}
+
+.listMoves::-webkit-scrollbar {
+  width: 1vw;
+}
+
+.listMoves::-webkit-scrollbar-track {
+  background: #91b96e;
+}
+
+.listMoves::-webkit-scrollbar-thumb {
+  border-radius: 2vw;
+  border: 1vw solid rgba(200, 255, 50, 0.514);
 }
 
 button {
@@ -118,12 +132,12 @@ button {
 }
 
 @keyframes viber {
-  20% {
-    transform: rotate(10deg);
+  50% {
+    transform: rotate(6deg);
   }
 
-  70% {
-    transform: rotate(-10deg);
+  100% {
+    transform: rotate(-12deg);
   }
 }
 
