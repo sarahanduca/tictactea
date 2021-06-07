@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createElement } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import confetti from "canvas-confetti";
@@ -40,32 +40,38 @@ class Board extends React.Component {
   renderSquare(i) {
     return (
       <Square
+        key={i}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
       />
     );
   }
 
+  renderBoard() {
+    const rows = 3;
+    const cols = 3;
+
+    let board = [];
+    let squares = [];
+    let currentIndex = 0;
+
+    for (let indexRow = 0; indexRow < rows; indexRow++) {
+      for (let indexCol = 0; indexCol < cols; indexCol++) {
+        squares = squares.concat(this.renderSquare(currentIndex));
+        currentIndex++;
+      }
+
+      board = board.concat(
+        createElement("div", { key: indexRow, className: "board-row" }, squares)
+      );
+      squares = [];
+    }
+
+    return board;
+  }
+
   render() {
-    return (
-      <div className="table">
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
-    );
+    return <div className="table">{this.renderBoard()}</div>;
   }
 }
 
@@ -84,13 +90,16 @@ class Game extends React.Component {
     this.x = "🌿";
     this.o = "🍵";
   }
+
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
+
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
+
     squares[i] = this.state.xIsNext ? this.x : this.o;
     this.setState({
       history: history.concat([
