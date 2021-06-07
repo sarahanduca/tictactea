@@ -3,10 +3,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import confetti from "canvas-confetti";
 
-function Square(props) {
+function Square({ value, onClick, status }) {
   return (
-    <button className="square" onClick={props.onClick}>
-      <div className="emojis">{props.value}</div>
+    <button className="square" onClick={onClick}>
+      <div className="emojis">{value}</div>
     </button>
   );
 }
@@ -126,6 +126,7 @@ class Game extends React.Component {
     });
 
     let status;
+    const isDraw = (currentSquare) => currentSquare !== null;
     if (winner != null) {
       status = "Winner: " + winner.squares;
       confetti({
@@ -133,6 +134,8 @@ class Game extends React.Component {
         startVelocity: 30,
         spread: 360,
       });
+    } else if (current.squares.every(isDraw)) {
+      status = "It's a draw!";
     } else {
       status = "Next player: " + (this.state.xIsNext ? this.x : this.o);
     }
